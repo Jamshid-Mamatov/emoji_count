@@ -12,15 +12,16 @@ def update():
     like=0
     dislike=0
     data=r.json()
-    text=data['result'][-1]['message']['text']
-                
-    if text=='👎':
-        dislike+=1
-    elif text=="👍":
-        like+=1
 
-    inform['like']=like
-    inform['dislike']=dislike
+def sendphoto(chat_id,message_photo,msg_id):
+    url=f"https://api.telegram.org/bot{token}/sendPhoto"
+
+    payload={
+        'chat_id':chat_id,
+        'photo':message_photo,
+        'reply_to_message_id':msg_id
+    }
+    r=requests.get(url,params=payload)
 
 
 def update_id():
